@@ -1,0 +1,66 @@
+:root {
+    --25: 25%;
+    --50: 50%;
+    --100: 100%;
+}
+
+#brand-heading {
+    text-align: center;
+    margin: 20px;
+}
+
+.form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 20px;
+}
+
+.item {
+    padding: 5px;
+    transition: all 0.4s;
+}
+
+.title-div {
+    width: 100px;
+    overflow: scroll;
+    white-space: nowrap;
+}
+
+.bmLink {
+    color: blue;
+    text-decoration: none;
+}
+
+.bmLink:hover {
+    text-decoration: underline;
+}
+
+.rmv-btn-div {
+    margin-left: 10px;
+}
+
+.bm-rmv-btn {
+    background-color: #fff;
+    color: red;
+    border: 0.3px solid red;
+    border-radius: 100%;
+    cursor: pointer;
+}
+
+.bm-rmv-btn:hover {
+    background-color: red;
+    color: #fff;
+}
+
+/* custom flex classes */
+.flex-basis-25 {
+    flex-basis: var(--25);
+}
+.flex-basis-50 {
+    flex-basis: var(--50);
+}
+.flex-basis-100 {
+    flex-basis: var(--100);
+}

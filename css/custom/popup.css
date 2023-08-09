@@ -1,0 +1,12 @@
+
+#addToBm{
+    border: 0.3px solid green;
+    border-radius: 5px;
+    background: none;
+    cursor: pointer;
+}
+
+#addToBm:hover{
+    background: green;
+    color: #fff;
+}

@@ -1,0 +1,26 @@
+{
+  "manifest_version": 3,
+  "name": "PBME",
+  "description": "Personal Bookmarks Manager Extension",
+  "version": "1.0",
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_title": "Click to view a popup",
+    "default_icon": {
+        "16": "images/icon16.png"
+    }
+  },
+  "background": {
+    "service_worker": "scripts/background/service_worker.js"
+  },
+  "permissions": [
+    "tabs", "storage","activeTab"
+  ],
+  "chrome_url_overrides" : {
+    "newtab": "newTab/newTab.html"
+  },
+  
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; style-src 'self'; object-src 'self'"
+  }
+}
