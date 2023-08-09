@@ -1,7 +1,6 @@
 const form = document.querySelector("form");
 const bmLink = document.querySelector("a");
 const bmbox = document.querySelector(".bm-box");
-// console.log(chrome.runtime.lastError);
 chrome.storage.local.get("bookmarks", (result)=>{
     const data = result.bookmarks;
     for(let i = 0; i < data.length; i++){
@@ -121,10 +120,8 @@ bmbox.addEventListener("click", (e)=>{
                     if(data[i].url === urlKey){
                         data.splice(i, 1);
                         chrome.storage.local.set({bookmarks: data}, ()=>{
-                            console.log("bookmarks updated.");
                             document.location.reload();
                         });
-                        console.log("bookmark removed.");
                         break;
                     }
                 }

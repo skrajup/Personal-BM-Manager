@@ -1,4 +1,3 @@
-console.log("pupup script");
 const addToBm = document.querySelector("#addToBm");
 var activeTab;
 
@@ -7,7 +6,7 @@ chrome.runtime.sendMessage({
     key: 1,
     isPopupOpen: true
 }).then(res=>{
-    console.log(res);
+    console.log("res");
 }).catch(err => {
     console.log(err);
 });
@@ -15,7 +14,6 @@ chrome.runtime.sendMessage({
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     // match listener key = 2
     if(message.role === "ROLE_POPUP" && message.key === 1){
-        console.log(message);
         activeTab = message.data;
     }else{
         console.log("active tab not received by popup");
@@ -23,7 +21,6 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 
 addToBm.addEventListener("click", (e)=>{
-    console.log("addtobm clicked");
     
     const title = activeTab[0].title;
     const url = activeTab[0].url;
@@ -39,14 +36,13 @@ addToBm.addEventListener("click", (e)=>{
         });
 
         chrome.storage.local.set({bookmarks: data}, ()=>{
-            console.log("new bookmark added to the localstorage.");
-            
+
             chrome.runtime.sendMessage({
                 role: "ROLE_NEWTAB",
                 key: 1,
                 action: "RELOAD"
             }).then(res=>{
-                console.log(res);
+                console.log("res");
             }).catch(err=>{
                 console.log(err);
             });
