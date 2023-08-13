@@ -25,8 +25,28 @@
 .title-div {
     width: 100px;
     overflow: scroll;
-    white-space: nowrap;
+    white-space: nowrap;    
 }
+
+/* Style the custom scrollbar */
+.title-div::-webkit-scrollbar {
+    width: 0;
+    height: 5px;
+}
+
+.title-div::-webkit-scrollbar-track {
+    background-color: #ffffff; /* Color of the scrollbar track */
+}
+
+.title-div::-webkit-scrollbar-thumb {
+    background-color: #e4e4e4; /* Color of the scrollbar thumb */
+    border-radius: 10px; /* Rounded corners for the thumb */
+}
+
+.title-div::-webkit-scrollbar-thumb:hover {
+    background-color: #b3b3b3; /* Color of the thumb on hover */
+}
+  
 
 .bmLink {
     color: blue;
