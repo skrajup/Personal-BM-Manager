@@ -1,0 +1,4 @@
+create groups of specific topic bookmarks
+and then add to them
+
+default is general

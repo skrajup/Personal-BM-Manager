@@ -1,98 +1,42 @@
+"use strict";
+
 const form = document.querySelector("form");
 const bmLink = document.querySelector("a");
 const bmbox = document.querySelector(".bm-box");
+
+const faviconHeight = "20px",   faviconWidth = "20px";
+
 chrome.storage.local.get("bookmarks", (result)=>{
     const data = result.bookmarks;
     for(let i = 0; i < data.length; i++){
         const bookmark = data[i];
-        
-        const title = bookmark.title;
-        const url = bookmark.url;
-        const faviconUrl = bookmark.faviconUrl;
 
-        // favicon
-        const faviconDiv = document.createElement("div");
-        faviconDiv.classList.add("d-flex", "px-2", "align-items-center");
-        const img = document.createElement("img");
-        img.src = faviconUrl;
-        img.alt = "favicon";
-        img.style.width = "40px";
-        img.style.height = "40px";
-        img.style.borderRadius = "100%";
-        faviconDiv.appendChild(img);
+        const bookmarkParams = {
+            title: bookmark.title,
+            url: bookmark.url,
+            faviconUrl: bookmark.faviconUrl
+        };
 
-        const item = document.createElement("div");
-        item.classList.add("flex-wrap", "d-flex", "flex-basis-25", "flex-grow-1", "border", "border-black", "item");
-        const purja1 = document.createElement("div");
-        purja1.classList.add("flex-fill", "d-flex", "px-2", "align-items-center", "title-div");
-        const purja2 = document.createElement("div");
-        purja2.classList.add("d-flex", "align-items-center", "rmv-btn-div");
-        const btn = document.createElement("button");
-        btn.classList.add("btn", "btn-danger", "bm-rmv-btn");
-
-        const a = document.createElement("a");
-        a.classList.add("bmLink");
-        const titleTextNode = document.createTextNode(title);
-        a.href = url;
-        a.target = "_blank";
-        a.appendChild(titleTextNode);
-
-
-        purja1.appendChild(a);
-        btn.innerHTML = `&#9932;`;
-        purja2.appendChild(btn);
-
-        item.appendChild(faviconDiv);
-        item.appendChild(purja1);
-        item.appendChild(purja2);
-
-        bmbox.appendChild(item);
+        appendBookmarkToNewTab(bookmarkParams);
     }
 });
 
 form.addEventListener("submit", (e)=>{
     e.preventDefault();
+
     const title = form.title.value;
     const url = form.url.value;
     const faviconUrl = "../images/bmIcon64.png"; 
 
-    const faviconDiv = document.createElement("div");
-    faviconDiv.classList.add("d-flex", "px-2", "align-items-center");
-    const img = document.createElement("img");
-    img.src = faviconUrl;
-    img.alt = "bookmark";
-    img.style.width = "40px";
-    img.style.height = "40px";
-    img.style.borderRadius = "100%";
-    faviconDiv.appendChild(img);
+    const bookmarkParams = {
+        title: title,
+        url: url,
+        faviconUrl: faviconUrl
+    };
 
+    appendBookmarkToNewTab(bookmarkParams);
 
-    const item = document.createElement("div");
-    item.classList.add("flex-wrap", "d-flex", "flex-basis-25", "flex-grow-1", "border", "border-black", "item");
-    const purja1 = document.createElement("div");
-    purja1.classList.add("flex-fill", "d-flex", "px-2", "align-items-center", "title-div");
-    const purja2 = document.createElement("div");
-    purja2.classList.add("d-flex", "align-items-center", "rmv-btn-div");
-    const btn = document.createElement("button");
-    btn.classList.add("btn", "btn-danger", "bm-rmv-btn");
-
-    const a = document.createElement("a");
-    a.classList.add("bmLink");
-    const titleTextNode = document.createTextNode(title);
-    a.href = url;
-    a.target = "_blank";
-    a.appendChild(titleTextNode);
-
-    purja1.appendChild(a);
-    btn.innerHTML = `&#9932;`;
-    purja2.appendChild(btn);
-
-    item.appendChild(faviconDiv);
-    item.appendChild(purja1);
-    item.appendChild(purja2);
-
-    bmbox.appendChild(item);
-
+    // push into localstorage
     chrome.storage.local.get("bookmarks", (result)=>{
         const data = result.bookmarks;
 
@@ -137,3 +81,47 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse)=>{
         }
     }
 });
+
+// append a bookmark to new tab UI
+function appendBookmarkToNewTab(bookmarkParams) {
+    const title = bookmarkParams.title;
+    const url = bookmarkParams.url;
+    const faviconUrl = bookmarkParams.faviconUrl;
+
+    // favicon
+    const faviconDiv = document.createElement("div");
+    faviconDiv.classList.add("d-flex", "px-2", "align-items-center");
+    const img = document.createElement("img");
+    img.src = faviconUrl;
+    img.alt = "favicon";
+    img.style.width = faviconWidth;
+    img.style.height = faviconHeight;
+    faviconDiv.appendChild(img);
+
+    const item = document.createElement("div");
+    item.classList.add("flex-wrap", "d-flex", "flex-basis-25", "flex-grow-1", "item");
+    const purja1 = document.createElement("div");
+    purja1.classList.add("flex-fill", "d-flex", "align-items-center", "title-div");
+    const purja2 = document.createElement("div");
+    purja2.classList.add("d-flex", "align-items-center", "rmv-btn-div");
+    const btn = document.createElement("button");
+    btn.classList.add("bm-rmv-btn");
+
+    const a = document.createElement("a");
+    a.classList.add("bmLink");
+    const titleTextNode = document.createTextNode(title);
+    a.href = url;
+    a.target = "_blank";
+    a.appendChild(titleTextNode);
+
+
+    purja1.appendChild(a);
+    btn.innerHTML = `&#9932;`;
+    purja2.appendChild(btn);
+
+    item.appendChild(faviconDiv);
+    item.appendChild(purja1);
+    item.appendChild(purja2);
+
+    bmbox.appendChild(item);
+}

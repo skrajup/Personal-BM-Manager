@@ -18,7 +18,8 @@
 }
 
 .item {
-    padding: 5px;
+    box-shadow: 0.1px 0.1px 0.3px 0.3px #ccc;
+    padding: 3px;
     transition: all 0.4s;
 }
 
@@ -26,32 +27,34 @@
     width: 100px;
     overflow: scroll;
     white-space: nowrap;
+
+    padding: 0 4px;
 }
 
 .bmLink {
-    color: blue;
+    color: rgb(64, 64, 64);
     text-decoration: none;
+    font-size: 12px;
 }
 
 .bmLink:hover {
+    color: blue;
     text-decoration: underline;
 }
 
 .rmv-btn-div {
-    margin-left: 10px;
+    margin-left: 5px;
 }
 
 .bm-rmv-btn {
     background-color: #fff;
-    color: red;
-    border: 0.3px solid red;
-    border-radius: 100%;
+    color: rgb(255, 90, 90);
+    border: none;
     cursor: pointer;
 }
 
 .bm-rmv-btn:hover {
-    background-color: red;
-    color: #fff;
+    color: red;
 }
 
 /* custom flex classes */

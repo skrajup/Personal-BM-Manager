@@ -1,3 +1,5 @@
+"use strict";
+
 const addToBm = document.querySelector("#addToBm");
 var activeTab;
 
